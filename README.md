@@ -1,2 +1,2 @@
-# DOM-piercing-talk
-«Perforando el DOM» Recursos para la charla de los ΦDays
+# ShadowDOM-piercing-talk
+«Perforando el Shadow DOM» Recursos para la charla de los ΦDays
