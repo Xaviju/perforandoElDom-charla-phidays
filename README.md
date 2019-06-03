@@ -33,6 +33,11 @@
 #### How
 #### When
 
+## Summary
+
+### Best practices
+### Conclusion
+
 ## Resources
 
 - [Fundamentals: web components](https://developers.google.com/web/fundamentals/web-components/shadowdom)
