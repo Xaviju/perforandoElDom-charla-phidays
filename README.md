@@ -3,6 +3,7 @@
 «Perforando el Shadow DOM» Estructura y recursos para la charla de los ΦDays 2019
 
 ### Custom Elements
+-------------------
 
 The browser gives us an excellent tool for structuring web applications. It's called HTML. Great as HTML may be, its vocabulary and extensibility are limited.
 
@@ -38,6 +39,7 @@ customElements.define('fancy-button', FancyButton, {extends: 'button'});
 - Custom elements cannot be self-closing.
 
 ### Shadow DOM
+------------------
 
 Over the years we've invented an exorbitant number of tools to circumvent the issues of global styles and HTML elements. From IDs to BEM.
 
@@ -59,7 +61,7 @@ It introduces scoped styles to the web platform. Without tools or naming convent
 ## Shadow DOM Piercing methods
 
 ### HTML Properties
-
+-------------------------
 HTML attributes are the main method for passing data from a parent component to its children.
 
 It's common for HTML properties to reflect their value back to the DOM as an HTML attribute. For example, when the values of hidden or id are changed in JS they are changed in HTML.
@@ -101,7 +103,7 @@ Props:
 Using this when altering the internal state of the component (only regarding logic)
 
 ### Slots
-
+----------------------------
 Slots are placeholders inside your component that users can fill with their own markup. By defining one or more slots, you invite outside markup to render in your component's shadow DOM. Essentially, you're saying "Render the user's markup over here".
 
 #### Why
