@@ -143,6 +143,7 @@ Outside the element shadow DOM
 Alter HTML content from outside the component's shadow DOM
 
 ### ::shadow and /deep/
+-----------------------
 
 The original intent of `/deep/` was to provide a way to handle exceptional cases of when the scoping boundary is in the way of an occasional practical need to tweak styling from outside of the scope or globally.
 
@@ -164,24 +165,28 @@ custom-element /deep/ h3 {
 Instead, this selector was used to alter most of the styles set by the component developer duplicating styles for ever UI widget. If the number of required rules to grow too large because we need to overwrite too many parts, what's the benefit of scoping?
 
 ### Custom properties
+-------------------------
 
 #### Why
 #### How
 #### When
 
-### :host() and :host-context()
+### :host() and :host-context() selectors
+-------------------------------------------
 
 #### Why
 #### How
 #### When
 
-### :part() and :theme()
+### :part() and :theme() psudo-selectors
+-------------------------------------------
 
 #### Why
 #### How
 #### When
 
 ## Summary
+-----------------
 
 ### Best practices
 ### Conclusion
