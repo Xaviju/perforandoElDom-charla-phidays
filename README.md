@@ -109,6 +109,8 @@ Slots are placeholders inside your component that users can fill with their own 
 #### Why
 
 Elements are allowed to "cross" the shadow DOM boundary when a <slot> invites them in.
+  
+> **WARNING** How to syle a slot?
 
 #### How
 
@@ -140,7 +142,7 @@ Outside the element shadow DOM
 
 #### When
 
-Alter HTML content from outside the component's shadow DOM
+The `<slot>` elements create a flexible template that can then be used to populate the shadow DOM of a web component.
 
 ### ::shadow and /deep/
 -----------------------
@@ -159,17 +161,39 @@ custom-element /deep/ h3 {
 }
 ```
 
-
 #### Why deprectaded?
 
 Instead, this selector was used to alter most of the styles set by the component developer duplicating styles for ever UI widget. If the number of required rules to grow too large because we need to overwrite too many parts, what's the benefit of scoping?
 
 ### Custom properties
 -------------------------
+Custom properties (sometimes referred to as CSS variables or cascading variables) are entities defined by CSS authors that contain specific values to be reused throughout a document. They are set using custom property notation (e.g., --main-color: black;) and are accessed using the var() function (e.g., color: var(--main-color);).
 
 #### Why
+Users can tweak internal styles if the component's author provides styling hooks using CSS custom properties. Conceptually, the idea is similar to `<slot>`. You create "style placeholders" for users to override.
+
 #### How
+Your component can declare custom properties and a fallback, and the CSS custom properties penetrate the Shadow DOM! This means than Custom Properties can be defined outside the shadow Dom but as long as the component expects it and its defined, the web component will receive the value.
+
+```css
+<style>
+  fancy-tabs {
+    --fancy-tabs-bg: black;
+  }
+</style>
+<fancy-tabs >...</fancy-tabs>
+```
+
+```css
+:host([background]) {
+  background: var(--fancy-tabs-bg, #9E9E9E);
+}
+
+```
+
 #### When
+
+This is very useful for theming, specially for design systems or similar cases where the font, spacing, weights, colors and so on is usually set up and shared.
 
 ### :host() and :host-context() selectors
 -------------------------------------------
