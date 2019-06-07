@@ -195,7 +195,51 @@ Your component can declare custom properties and a fallback, and the CSS custom 
 
 This is very useful for theming, specially for design systems or similar cases where the font, spacing, weights, colors and so on is usually set up and shared.
 
-### :host() and :host-context() selectors
+### :host
+-------------------------------------------
+The newly created html element can be styled too. There is a new selector inside the scoped CSS that allow authors to style how the new element will be represented.
+
+#### Why
+By default all new HTML elements created by the authors will be `display: inline` but we can author how the element will be represented in its position. This is nos strictly crossing the shadow DOM, but affects the convention of the inside and outside
+
+#### How
+
+Applying styles to the container is simple:
+
+```css
+host {
+  display: block; /* by default, custom elements are display: inline */
+  contain: content; /* CSS containment FTW. */
+}
+```
+
+#### When
+Is recommended that every html element should contain the HTML required to display itself regardless of its context.
+Is a common mistake to style the element from the parent, and the fact is that parent styles override host styles (makes sense) but will require more lines of CSS and won't be reusable. 
+
+### :host(selector)
+-------------------------------------------
+The HTML elements can 
+
+#### Why
+By default all new HTML elements created by the authors will be `display: inline` but we can author how the element will be represented in its position. This is nos strictly crossing the shadow DOM, but affects the convention of the inside and outside
+
+#### How
+
+Applying styles to the container is simple:
+
+```css
+host {
+  display: block; /* by default, custom elements are display: inline */
+  contain: content; /* CSS containment FTW. */
+}
+```
+
+#### When
+Is recommended that every html element should contain the HTML required to display itself regardless of its context.
+Is a common mistake to style the element from the parent, and the fact is that parent styles override host styles (makes sense) but will require more lines of CSS and won't be reusable.
+
+:host-context() selectors
 -------------------------------------------
 
 #### Why
