@@ -144,6 +144,10 @@ Outside the element shadow DOM
 
 The `<slot>` elements create a flexible template that can then be used to populate the shadow DOM of a web component.
 
+### :slotted psudo-selector (TODO)
+-------------------------------------------
+The ::slotted() CSS pseudo-element represents any element that has been placed into a slot inside an HTML template
+
 ### ::shadow and /deep/
 -----------------------
 
@@ -245,6 +249,8 @@ Is a common mistake to style the element from the parent, and the fact is that p
 #### Why
 #### How
 #### When
+
+
 
 ### :part() and :theme() psudo-selectors
 -------------------------------------------
