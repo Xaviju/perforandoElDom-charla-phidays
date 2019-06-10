@@ -144,8 +144,7 @@ Outside the element shadow DOM
 
 The `<slot>` elements create a flexible template that can then be used to populate the shadow DOM of a web component.
 
-### :slotted psudo-selector (TODO)
--------------------------------------------
+#### :slotted psudo-selector (TODO)
 The ::slotted() CSS pseudo-element represents any element that has been placed into a slot inside an HTML template
 
 ### ::shadow and /deep/
@@ -201,7 +200,7 @@ This is very useful for theming, specially for design systems or similar cases w
 
 ### :host
 -------------------------------------------
-The newly created html element can be styled too. There is a new selector inside the scoped CSS that allow authors to style how the new element will be represented.
+The newly created html element can be styled too. There is a new selector inside the scoped CSS that allow authors to style how the new element will be represented, and not something inside its template.
 
 #### Why
 By default all new HTML elements created by the authors will be `display: inline` but we can author how the element will be represented in its position. This is nos strictly crossing the shadow DOM, but affects the convention of the inside and outside
@@ -223,10 +222,10 @@ Is a common mistake to style the element from the parent, and the fact is that p
 
 ### :host(selector)
 -------------------------------------------
-The HTML elements can 
+The HTML elements can style its host container and it behaviours in its context. By default all new HTML elements created by the authors will be `display: inline` but we can author how the element will be represented in its position. This is nos strictly crossing the shadow DOM, but affects the convention of the inside and outside
 
 #### Why
-By default all new HTML elements created by the authors will be `display: inline` but we can author how the element will be represented in its position. This is nos strictly crossing the shadow DOM, but affects the convention of the inside and outside
+Its better to set the style of the host container from the inside of the component that from the outside, avoinding code duplicity and manipulation from other context. In case of emergency, CSS from the parent has more priority that host styles.
 
 #### How
 
@@ -245,15 +244,57 @@ Is a common mistake to style the element from the parent, and the fact is that p
 
 :host-context() selectors
 -------------------------------------------
+Similar to the host selector, we might want to style a component depending its hierarchy. Similar to the previous selector, but in this case the selector will be targeted when any of the parents of this component has the defined selector
 
 #### Why
+It can happen that depending on the position of the component we wnat to style it differently but keep the same behaviour. Instead of providing a uber complicated API, we can choose just to add a `host-context` selector to ensure that the API interface does not change but depending on its context, the UI dos change. 
+
 #### How
+Its simple, similar to the host selector
+
+```css
+host-context(selector) {
+  display: block; /* by default, custom elements are display: inline */
+  contain: content; /* CSS containment FTW. */
+}
+```
+
 #### When
+Imagine we have two instances of a component with a button. The first one is a cgild of the `main` element and the second one is child of the `aside` HTML element. We might want to display a slightly more visual button for the first one, to make it stand out. Using host-context this will not require more code in the logic of the component.
 
 
-
-### :part() and :theme() psudo-selectors
+### :part() pseudo-selector
 -------------------------------------------
+This pseudo selector will allow authors to style style inside a shadow tree, from outside of that shadow tree keeping the structure of the components and targeting only some nodes.
+
+#### Why
+The problem with using just custom properties for styling/theming is that it places the on the element author to basically declare every possible styleable property as a custom property.
+
+#### How
+It has a los of opctions but, basically:
+
+```html
+<x-foo>
+  <!-- #shadow-root -->
+    <div part="some-box"><span>...</span></div>
+    <input part="some-input">
+    <div>...</div> /* not styleable
+</x-foo>
+```
+
+```css
+x-foo::part(some-box) {
+  background: CornflowerBlue;
+}
+
+```
+
+#### When
+When some part of your component might be exposed to the outside to allow you to add specific styles and it also need to style its pseudo selectors as `Hover` or others. 
+
+### :theme() pseudo-selector
+-------------------------------------------
+This pseudo selector has some similarities with the previous one.
 
 #### Why
 #### How
