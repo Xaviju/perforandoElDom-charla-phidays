@@ -1,6 +1,8 @@
-# ShadowDOM piercing talk
+# Piercing the DOM | Kaleidos PhiDays talk
 
-«Perforando el Shadow DOM» Estructura y recursos para la charla de los ΦDays 2019
+> «Perforando el Shadow DOM» Estructura y recursos para la charla de los ΦDays 2019
+
+**Warning: This is a work in progress**
 
 ### Custom Elements
 -------------------
@@ -301,7 +303,7 @@ When some part of your component might be exposed to the outside to allow you to
 This pseudo selector is similar to the previous one except for an important matter: it can match regardless of whether the originating element is a shadow host or not. This can go arbitrarily deep in the shadow tree. So, no matter how deeply nested they are, you could style all the exposed parts
 
 #### Why
-This pseuso-selector will allow that, given an exposed part in the elements, author will be able to change all of them using a single command. Since this go deep the shadow root, is similar to custom properties, but for pieces of code.
+This pseudo-selector will allow that, given an exposed part in the elements, author will be able to change all of them using a single command. Since this go deep the shadow root, is similar to custom properties, but for pieces of code.
 
 #### How
 ```html
@@ -327,13 +329,20 @@ This pseuso-selector will allow that, given an exposed part in the elements, aut
 ```
 
 #### When
-
+matching all elements in a page is a powerful tool for creating custom themes. It allows the authors to create themes using a single selector, for instance, for a full library of components.
 
 ## Summary
 -----------------
 
-### Best practices
-### Conclusion
+- Use HTML properties for component logic
+- Use HTML `slots` to allow the authors to add HTML and style it using the `slotted` psudo selector
+- Do not use `::shadow` or `/deep/` (or similar) pseudo selectors since they are deprecated and should be removed.
+- Use :host() to style the tag of a component from the shadow DOM instead that from its parent.
+- Use host-context() to style the component tag when it depends of a parent HTML element.
+- Use custom properties to allow an author to style a value from multiple components from outside.
+- Use the `:part` pseudo selector to allow an author to style a piece of component from outside.
+- Use the `:theme` pseudo selector to allow authors to style a piece of all the components from outside.
+
 
 ## Resources
 
