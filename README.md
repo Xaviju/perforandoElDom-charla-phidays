@@ -268,6 +268,7 @@ Imagine we have two instances of a component with a button. The first one is a c
 This pseudo selector will allow authors to style style inside a shadow tree, from outside of that shadow tree keeping the structure of the components and targeting only some nodes.
 
 #### Why
+The previous proposed method for styling inside the shadow tree, the `>>>` combinator, turned out to be too powerful for its own good.
 The problem with using just custom properties for styling/theming is that it places the on the element author to basically declare every possible styleable property as a custom property.
 
 #### How
@@ -287,6 +288,9 @@ x-foo::part(some-box) {
   background: CornflowerBlue;
 }
 
+x-foo::part(some-input) {
+  display: flex;
+}
 ```
 
 #### When
@@ -294,11 +298,36 @@ When some part of your component might be exposed to the outside to allow you to
 
 ### :theme() pseudo-selector
 -------------------------------------------
-This pseudo selector has some similarities with the previous one.
+This pseudo selector is similar to the previous one except for an important matter: it can match regardless of whether the originating element is a shadow host or not. This can go arbitrarily deep in the shadow tree. So, no matter how deeply nested they are, you could style all the exposed parts
 
 #### Why
+This pseuso-selector will allow that, given an exposed part in the elements, author will be able to change all of them using a single command. Since this go deep the shadow root, is similar to custom properties, but for pieces of code.
+
 #### How
+```html
+<x-wrapper>
+  <!-- #shadow-root -->
+  <x-button part="label">
+    <!-- This background will be CornflowerBlue color -->
+  </x-button>
+    <x-bar>
+      <!-- #shadow-root -->
+      <x-button part="label">
+        <!-- This background will be CornflowerBlue color -->
+      </x-button>
+    </x-bar>
+  <x-foo></x-foo>
+</x-wrapper>
+```
+
+```css
+:root::theme(label) {
+  background: CornflowerBlue;
+}
+```
+
 #### When
+
 
 ## Summary
 -----------------
